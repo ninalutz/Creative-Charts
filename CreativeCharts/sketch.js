@@ -7,13 +7,13 @@ var numcountries   = 150;
 var countries;
 
 function setup() {
-  createCanvas(displayWidth-200, displayHeight-200);
+  createCanvas(displayWidth-100, displayHeight-200);
   ellipseMode(RADIUS);
    overC = false;
  locked = false;
  countries = [];
  for(var i = 0; i<numcountries; i++){
-   countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)));
+   countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)), random(0, 1000));
  }
 }
 
@@ -42,13 +42,14 @@ function draw() {
 
 
 
-var country = function(name, size, location){
+var country = function(name, size, location, amount){
   this.name = name;
   this.x = location.x;
   this.y = location.y;
   this.size = size;
   this.locked = false;
   this.overC = false;
+  this.amount = amount;
 }
 
 country.prototype.mouseupdate = function(){
@@ -62,7 +63,7 @@ country.prototype.mouseupdate = function(){
 
   } else {
     stroke(153);
-    fill(255);
+    fill(this.amount, 0, 0, 50);
     this.overC = false;
   }
 
