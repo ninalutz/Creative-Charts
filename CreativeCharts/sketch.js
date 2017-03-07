@@ -6,7 +6,6 @@
 var numcountries   = 6;
 var countries;
 
-
 function setup() {
   createCanvas(displayWidth-100, displayHeight-200);
   ellipseMode(RADIUS);
@@ -47,13 +46,14 @@ country.prototype.mouseupdate = function(){
       stroke(255); 
       fill(153);
     } 
+
   } else {
     stroke(153);
     fill(255);
     this.overC = false;
   }
-  
-  
+
+    ellipse(cx, cy, 50, 50);
 }
 
   function mousePressed(){
