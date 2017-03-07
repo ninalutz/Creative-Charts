@@ -4,6 +4,8 @@ var rightcountries;
 
 var curcountry;
 
+var compamount;
+
 function setup() {
   createCanvas(displayWidth-100, displayHeight-200);
   ellipseMode(RADIUS);
@@ -13,6 +15,7 @@ function setup() {
  
  countries = [];
  rightcountries = [];
+ curcountry = new country("", 0, createVector(-200, -200), 0);
  for(var i = 0; i<numcountries; i++){
    countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)), 255);
  }
@@ -44,7 +47,15 @@ function draw() {
   text("Percentage of world", width/4, height-90);
     text("Percentage of world", 3*width/4, height-90);
     noFill();
-  
+
+compamount = 0;
+ for(var i = 0; i<rightcountries.length; i++){
+   compamount += rightcountries[i].size;
+ }
+ 
+ fill(255, 0, 0, 50);
+ ellipse(curcountry.x, curcountry.y, 100 * (compamount/curcountry.size), 100 * (compamount/curcountry.size));
+ 
 }
 
 
@@ -115,6 +126,9 @@ country.prototype.display = function(){
 if(this.y > height/2 && this.x < width/2){
   ellipse(this.x, this.y, 100, 100);
   curcountry = this;
+    if (rightcountries.indexOf(this) > -1) {
+    rightcountries.splice(index, 1);
+  }
 }
 
 else if(this.y > height/2 && this.x > width/2){
