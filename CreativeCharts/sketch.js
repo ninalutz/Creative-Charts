@@ -53,7 +53,6 @@ country.prototype.mouseupdate = function(){
     this.overC = false;
   }
 
-    ellipse(cx, cy, 50, 50);
 }
 
   function mousePressed(){
