@@ -1,23 +1,30 @@
-var cx = 100; 
-var cy = 200;
-var csize = 50;
- var overC, locked;
+// var cx = 100; 
+// var cy = 200;
+// var csize = 50;
+// var overC, locked;
 
-var testC;
+var numcountries   = 6;
+var countries;
+
 
 function setup() {
   createCanvas(1000, 500);
   ellipseMode(RADIUS);
    overC = false;
  locked = false;
- testC = new country("USA", 80, createVector(300, 200));
+ countries = [];
+ for(var i = 0; i<numcountries; i++){
+   countries[i] = new country("USA", random(80, 200), createVector(random(width), random(height)));
+ }
 }
 
 function draw() {
   background(200);
 
-    testC.mouseupdate();
-    testC.display();
+  for(var i = 0; i<numcountries; i++){
+   countries[i].mouseupdate();
+     countries[i].display();
+  }
 }
 
 
@@ -46,23 +53,36 @@ country.prototype.mouseupdate = function(){
     this.overC = false;
   }
   
+  
+}
+
   function mousePressed(){
-    if(this.overC){
-      this.locked = !this.locked;
+    // if(testC.overC){
+    //   testC.locked = !testC.locked;
+    // }
+    for(var i = 0; i<numcountries; i++){
+        if(countries[i].overC){
+          countries[i].locked = !countries[i].locked;
+        }
+      
     }
 }
 
+
 function mouseDragged(){
-  if(locked){
-    this.x = mouseX;
-    this.y = mouseY;
-  }
+    for(var i = 0; i<numcountries; i++){
+        if(countries[i].locked){
+          countries[i].x = mouseX;
+          countries[i].y = mouseY;
+        }
+      
+    }
 }
 
 function mouseReleased(){
-  this.locked = false;
-}
-  
+      for(var i = 0; i<numcountries; i++){
+          countries[i].locked = false;
+    }
 }
 
 country.prototype.display = function(){
