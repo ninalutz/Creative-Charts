@@ -3,17 +3,17 @@
 // var csize = 50;
 // var overC, locked;
 
-var numcountries   = 6;
+var numcountries   = 150;
 var countries;
 
 function setup() {
-  createCanvas(displayWidth-100, displayHeight-200);
+  createCanvas(displayWidth-200, displayHeight-200);
   ellipseMode(RADIUS);
    overC = false;
  locked = false;
  countries = [];
  for(var i = 0; i<numcountries; i++){
-   countries[i] = new country("USA", random(80, 200), createVector(random(width), random(height)));
+   countries[i] = new country("USA", random(30, 50), createVector(random(width), random(height/2)));
  }
 }
 
