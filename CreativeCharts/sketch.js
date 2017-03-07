@@ -1,5 +1,6 @@
 var numcountries   = 217;
 var countries;
+var rightcountries;
 
 var curcountry;
 
@@ -11,6 +12,7 @@ function setup() {
   locked = false;
  
  countries = [];
+ rightcountries = [];
  for(var i = 0; i<numcountries; i++){
    countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)), 255);
  }
@@ -19,6 +21,7 @@ function setup() {
 
 function draw() {
   background(255);
+  print(rightcountries.length);
 
   for(var i = 0; i<numcountries; i++){
    countries[i].mouseupdate();
@@ -114,9 +117,21 @@ if(this.y > height/2 && this.x < width/2){
   curcountry = this;
 }
 
+else if(this.y > height/2 && this.x > width/2){
+  if(rightcountries.indexOf(this) < 0){
+  rightcountries.push(this);
+  }
+  fill(this.curcolor);
+  ellipse(this.x, this.y, this.size, this.size);
+}
+
 else{
   fill(this.curcolor);
   ellipse(this.x, this.y, this.size, this.size);
+  var index = rightcountries.indexOf(this);
+  if (index > -1) {
+    rightcountries.splice(index, 1);
+  }
 }
   noStroke();
   fill(0);
