@@ -1,8 +1,3 @@
-// var cx = 100; 
-// var cy = 200;
-// var csize = 50;
-// var overC, locked;
-
 var numcountries   = 217;
 var countries;
 
@@ -11,12 +6,15 @@ var curcountry;
 function setup() {
   createCanvas(displayWidth-100, displayHeight-200);
   ellipseMode(RADIUS);
-   overC = false;
- locked = false;
+  
+  overC = false;
+  locked = false;
+ 
  countries = [];
  for(var i = 0; i<numcountries; i++){
    countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)), 255);
  }
+ 
 }
 
 function draw() {
@@ -72,7 +70,7 @@ country.prototype.mouseupdate = function(){
   } else {
     stroke(153);
     if(this != curcountry){
-    fill(this.amount, 0, 0, 50);
+    fill(this.curcolor, 0, 0, 50);
     }
     else{
       fill(255);
@@ -117,13 +115,13 @@ if(this.y > height/2 && this.x < width/2){
 }
 
 else{
-  fill(this.amount, 0, 0, 50);
+  fill(this.curcolor);
   ellipse(this.x, this.y, this.size, this.size);
 }
   noStroke();
   fill(0);
-    text(this.name, this.x, this.y);
-    stroke(255, 0, 0);
-  fill(153, 50);
+  text(this.name, this.x, this.y);
+  stroke(255, 0, 0);
+  fill(this.curcolor);
   
 }
