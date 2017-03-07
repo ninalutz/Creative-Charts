@@ -13,7 +13,7 @@ function setup() {
  locked = false;
  countries = [];
  for(var i = 0; i<numcountries; i++){
-   countries[i] = new country("USA", random(30, 50), createVector(random(width), random(height/2)));
+   countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)));
  }
 }
 
@@ -24,6 +24,19 @@ function draw() {
    countries[i].mouseupdate();
      countries[i].display();
   }
+  
+  fill(0);
+  noStroke();
+  textSize(20);
+  textAlign(CENTER, CENTER);
+  text("Drag country here for comparisons", width/4, height/2 + 20);  
+  text("Drag other countries here for comparisons", 3*width/4, height/2 + 20);
+  
+  stroke(0);
+  strokeWeight(2);
+  line(width/2, height/2 + 20, width/2, height - 100);
+
+  
 }
 
 
@@ -52,6 +65,7 @@ country.prototype.mouseupdate = function(){
     fill(255);
     this.overC = false;
   }
+
 
 }
 
