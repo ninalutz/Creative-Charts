@@ -8,7 +8,7 @@ var countries;
 
 
 function setup() {
-  createCanvas(1000, 500);
+  createCanvas(displayWidth-100, displayHeight-200);
   ellipseMode(RADIUS);
    overC = false;
  locked = false;
