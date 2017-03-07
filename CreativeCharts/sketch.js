@@ -3,8 +3,10 @@
 // var csize = 50;
 // var overC, locked;
 
-var numcountries   = 150;
+var numcountries   = 217;
 var countries;
+
+var curcountry;
 
 function setup() {
   createCanvas(displayWidth-100, displayHeight-200);
@@ -13,12 +15,12 @@ function setup() {
  locked = false;
  countries = [];
  for(var i = 0; i<numcountries; i++){
-   countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)), random(0, 1000));
+   countries[i] = new country("USA", random(20, 40), createVector(random(width), random(height/2 - 40)), 255);
  }
 }
 
 function draw() {
-  background(200);
+  background(255);
 
   for(var i = 0; i<numcountries; i++){
    countries[i].mouseupdate();
@@ -35,7 +37,12 @@ function draw() {
   stroke(0);
   strokeWeight(2);
   line(width/2, height/2 + 20, width/2, height - 100);
-
+  
+  noStroke();
+  fill(0);
+  text("Percentage of world", width/4, height-90);
+    text("Percentage of world", 3*width/4, height-90);
+    noFill();
   
 }
 
@@ -50,6 +57,7 @@ var country = function(name, size, location, amount){
   this.locked = false;
   this.overC = false;
   this.amount = amount;
+  this.curcolor;
 }
 
 country.prototype.mouseupdate = function(){
@@ -57,23 +65,26 @@ country.prototype.mouseupdate = function(){
       mouseY > this.y-this.size && mouseY < this.y+this.size) {
     this.overC = true;  
     if(!this.locked) { 
-      stroke(255); 
-      fill(153);
+      stroke(255, 0, 0); 
+      this.curcolor = color(153, 50);
     } 
 
   } else {
     stroke(153);
+    if(this != curcountry){
     fill(this.amount, 0, 0, 50);
-    this.overC = false;
+    }
+    else{
+      fill(255);
+    }
+   this.curcolor = color(this.amount, 0, 0, 50);
+  this.overC = false;
   }
-
-
+  
+  
 }
 
   function mousePressed(){
-    // if(testC.overC){
-    //   testC.locked = !testC.locked;
-    // }
     for(var i = 0; i<numcountries; i++){
         if(countries[i].overC){
           countries[i].locked = !countries[i].locked;
@@ -100,7 +111,19 @@ function mouseReleased(){
 }
 
 country.prototype.display = function(){
-  
+if(this.y > height/2 && this.x < width/2){
+  ellipse(this.x, this.y, 100, 100);
+  curcountry = this;
+}
+
+else{
+  fill(this.amount, 0, 0, 50);
   ellipse(this.x, this.y, this.size, this.size);
+}
+  noStroke();
+  fill(0);
+    text(this.name, this.x, this.y);
+    stroke(255, 0, 0);
+  fill(153, 50);
   
 }
